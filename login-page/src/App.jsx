@@ -3,7 +3,6 @@ import Navbar from "./components/Navbar";
 import Login from "./components/Login";
 import ForgotPassword from './components/ForgotPassword';
 
-
 function App() {
   const [showForgotPassword, setShowForgotPassword] = useState(false);
 
@@ -25,17 +24,15 @@ function App() {
       <Navbar />
       {/* Main Content */}
       <main className="z-10 flex flex-col items-center min-h-[calc(100vh-80px)]">
-
-
-        {showForgotPassword ? (
-          <ForgotPassword onBack={() => setShowForgotPassword(false)} />
-        ) : (
-          <Login onForgotPassword={() => setShowForgotPassword(true)} />
-        )}
+        {/* Glass Card */}
+        <div className="backdrop-blur-sm bg-white/1 rounded-2xl shadow-xl border border-white/20 p-8 mt-10">
+          {showForgotPassword ? (
+            <ForgotPassword onBack={() => setShowForgotPassword(false)} />
+          ) : (
+            <Login onForgotPassword={() => setShowForgotPassword(true)} />
+          )}
+        </div>
       </main>
-
-      {/* <Login />
-      <ForgotPassword/> */}
     </div>
   )
 }
