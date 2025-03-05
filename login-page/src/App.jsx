@@ -17,15 +17,16 @@ function App() {
           backgroundPosition: 'center',
           opacity: '0.4',
           backgroundRepeat: 'no-repeat',
+          backgroundAttachment: 'fixed',
         }}
       />
 
       {/* Logo */}
       <Navbar />
       {/* Main Content */}
-      <main className="z-10 flex flex-col items-center min-h-[calc(100vh-80px)]">
+      <main className="z-10 flex flex-col items-center">
         {/* Glass Card */}
-        <div className="backdrop-blur-sm bg-white/1 rounded-2xl shadow-xl border border-white/20 p-8 mt-10">
+        <div className="backdrop-blur-sm bg-white/1 rounded-2xl shadow-xl border border-white/20 p-8">
           {showForgotPassword ? (
             <ForgotPassword onBack={() => setShowForgotPassword(false)} />
           ) : (
