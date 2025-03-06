@@ -56,15 +56,16 @@ function Login({ onForgotPassword = () => { } }) {
                             onFocus={() => handleFocus("username")}
                             onBlur={handleBlur}
                             ref={usernameRef}
-                            className="w-full pl-12 pr-4 py-3 rounded-full bg-white border border-gray-200 focus:border-yellow-500 focus:ring-2 focus:ring-yellow-100 outline-none transition-all"
+                            className="w-full pl-12 pr-4 py-3 rounded-full bg-white border-2 border-gray-200 focus:border-b-yellow-500 focus:ring-2 focus:ring-yellow-100 outline-none transition-all"
                             required
                         />
                         <label
                             htmlFor="username"
-                            className={`absolute left-12 transition-all duration-200 pointer-events-none ${focusedField === "username" || formData.username
-                                ? "text-xs -top-2.5 left-6 bg-white px-2 text-yellow-500"
-                                : "text-gray-500 top-1/2 transform -translate-y-1/2"
-                                }`}
+                            className={`absolute transition-all duration-200 pointer-events-none ${
+                                focusedField === "username" || formData.username
+                                  ? "text-s -top-3 left-6  px-2 text-yellow-500"
+                                  : "text-gray-500 top-1/2 left-12 transform -translate-y-1/2"
+                              }`}
                         >
                             Username
                         </label>
@@ -80,15 +81,16 @@ function Login({ onForgotPassword = () => { } }) {
                             onFocus={() => handleFocus("password")}
                             onBlur={handleBlur}
                             ref={passwordRef}
-                            className="w-full pl-12 pr-12 py-3 rounded-full bg-white border border-gray-200 focus:border-yellow-500 focus:ring-2 focus:ring-yellow-100 outline-none transition-all"
+                            className="w-full pl-12 pr-12 py-3 rounded-full bg-white border-2 border-gray-200 focus:border-b-yellow-500 focus:ring-2 focus:ring-yellow-100 outline-none transition-all"
                             required
                         />
                         <label
                             htmlFor="password"
-                            className={`absolute left-12 transition-all duration-200 pointer-events-none ${focusedField === "password" || formData.password
-                                ? "text-xs -top-2.5 left-6 bg-white px-2 text-yellow-500"
-                                : "text-gray-500 top-1/2 transform -translate-y-1/2"
-                                }`}
+                            className={`absolute transition-all duration-200 pointer-events-none ${
+                                focusedField === "password" || formData.password
+                                  ? "text-s -top-3 left-6 px-2 text-yellow-500"
+                                  : "text-gray-500 top-1/2 left-12 transform -translate-y-1/2"
+                              }`}
                         >
                             Password
                         </label>

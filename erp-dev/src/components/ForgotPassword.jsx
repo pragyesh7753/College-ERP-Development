@@ -30,7 +30,7 @@ function ForgotPassword({ onBack = () => { } }) {
 
             <form onSubmit={handleSubmit} className="space-y-4">
                 <div className="relative">
-                    <Mail className="absolute left-4 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-500 z-10" />
+                    <Mail className="absolute left-4 top-1/2 transform -translate-y-1/2 w-5 h-5 text-black z-10" />
                     <input
                         type="email"
                         name="email"
@@ -40,15 +40,15 @@ function ForgotPassword({ onBack = () => { } }) {
                         onFocus={handleFocus}
                         onBlur={handleBlur}
                         ref={emailRef}
-                        className="w-full pl-12 pr-4 py-3 rounded-full bg-white border border-gray-200 focus:border-yellow-500 focus:ring-2 focus:ring-yellow-100 outline-none transition-all"
+                        className="w-full pl-12 pr-4 py-3 rounded-full bg-white border-2 border-gray-200 focus:border-b-yellow-500 focus:ring-2 focus:ring-yellow-100 outline-none transition-all"
                         required
                     />
                     <label
                         htmlFor="email"
-                        className={`absolute left-12 transition-all duration-200 pointer-events-none ${isFocused || email
-                                ? "text-xs -top-2.5 left-6 bg-white px-2 text-yellow-500"
-                                : "text-gray-500 top-1/2 transform -translate-y-1/2"
-                            }`}
+                        className={`absolute transition-all duration-200 pointer-events-none ${isFocused || email
+                            ? "text-s -top-2 left-6  px-2 text-yellow-500"
+                            : "text-gray-500 top-1/2 left-12 transform -translate-y-1/2"
+                        }`}
                     >
                         Email Address
                     </label>

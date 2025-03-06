@@ -26,7 +26,7 @@ function App() {
       {/* Main Content */}
       <main className="z-10 flex flex-col items-center">
         {/* Glass Card */}
-        <div className="backdrop-blur-sm bg-white/1 rounded-2xl shadow-xl border border-white/20 p-8">
+        <div className="backdrop-blur-sm bg-white/1 rounded-2xl shadow-xl border border-white/20 p-8 z-10">
           {showForgotPassword ? (
             <ForgotPassword onBack={() => setShowForgotPassword(false)} />
           ) : (
