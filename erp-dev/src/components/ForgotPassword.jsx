@@ -22,10 +22,12 @@ function ForgotPassword({ onBack = () => { } }) {
     }
 
     return (
+      <>
         <div className="w-full max-w-md px-6">
+            
             <h2 className="text-2xl font-semibold text-center mb-4">Reset Password</h2>
             <p className="text-rose-800 text-center mb-8">
-                Enter your email address and we'll send you instructions to reset your password
+            Please enter your email address, and we will send you instructions to reset your password.
             </p>
 
             <form onSubmit={handleSubmit} className="space-y-4">
@@ -45,8 +47,8 @@ function ForgotPassword({ onBack = () => { } }) {
                     />
                     <label
                         htmlFor="email"
-                        className={`absolute transition-all duration-200 pointer-events-none ${isFocused || email
-                            ? "text-s -top-2 left-6  px-2 text-yellow-500"
+                        className={`absolute transition-all duration-350  pointer-events-none ${isFocused || email
+                            ? "text-xs -top-2 tracking-[0.1rem] left-6  px-2 text-yellow-500"
                             : "text-gray-500 top-1/2 left-12 transform -translate-y-1/2"
                         }`}
                     >
@@ -55,19 +57,30 @@ function ForgotPassword({ onBack = () => { } }) {
                 </div>
                 <button
                     type="submit"
-                    className="relative w-full py-3 rounded-full bg-yellow-500 text-white font-semibold transition-all hover:bg-yellow-600 mt-2 cursor-pointer active:shadow-lg active:transform active:translate-y-0.5"
+                    className="relative hover:-translate-y-1 w-full py-3 rounded-full bg-yellow-500 text-white font-semibold transition-all hover:bg-yellow-600 mt-2 cursor-pointer active:shadow-lg active:transform active:translate-y-0.5"
                 >
                     Send Reset Instructions
                 </button>
                 <button
                     type="button"
                     onClick={onBack}
-                    className="relative w-full py-3 rounded-full bg-yellow-500 text-white font-semibold transition-all hover:bg-yellow-600 mt-0.5 cursor-pointer active:shadow-lg active:transform active:translate-y-0.5"
+                    className="relative w-full hover:-translate-y-1 py-3 rounded-full bg-yellow-500 text-white font-semibold transition-all hover:bg-yellow-600 mt-0.5 cursor-pointer active:shadow-lg active:transform active:translate-y-0.5"
                 >
                     Back to Login
                 </button>
             </form>
+            
+            
+
+    
         </div>
+
+        
+      <div className="  transition-transform duration-500 img-2 ">
+
+<img src="./src/assets/logo-nav.png" alt="logo"  />
+</div>
+</>
     )
 }
 

@@ -14,16 +14,31 @@ function Login({ onForgotPassword = () => { } }) {
     const passwordRef = useRef(null)
     const usernameRef = useRef(null)
 
-    const handleSubmit = (e) => {
+    const handleSubmit =  async(e) => {
         e.preventDefault()
         // Handle login logic here
+        const response = await fetch("http://localhost:5000/api/auth/Register" , {
+            method: "POST",
+            body: JSON.stringify(formData),
+            headers: {
+              "Content-Type": "application/JSON",
+            } 
+          
+            
+          }
+        )
     }
 
-    const handleChange = (e) => {
+    const  handleChange =  (e) => {
         setFormData({
             ...formData,
             [e.target.name]: e.target.value,
         })
+
+       
+        
+      
+    
     }
 
     const togglePasswordVisibility = () => {
@@ -40,10 +55,19 @@ function Login({ onForgotPassword = () => { } }) {
     const handleBlur = () => {
         setFocusedField(null)
     }
+    
+    
+
 
     return (
-        <>
-            <form onSubmit={handleSubmit} className="w-full max-w-md px-6">
+        < >
+
+<div className="transition-transform duration-500 img-2 ">
+
+<img src="./src/assets/logo-nav.png" alt="logo"  />
+</div>
+        <div>
+        <form onSubmit={handleSubmit} className="w-full max-w-md px-6">
                 <div className="space-y-4">
                     <div className="relative">
                         <CircleUserRound className="absolute left-4 top-1/2 transform -translate-y-1/2 w-5 h-5 text-black z-10" />
@@ -61,9 +85,9 @@ function Login({ onForgotPassword = () => { } }) {
                         />
                         <label
                             htmlFor="username"
-                            className={`absolute transition-all duration-200 pointer-events-none ${
+                            className={`absolute transition-all duration-350 pointer-events-none ${
                                 focusedField === "username" || formData.username
-                                  ? "text-s -top-3 left-6  px-2 text-yellow-500"
+                                  ? "text-xs -top-3 tracking-[0.1rem] left-6  px-2 text-yellow-500"
                                   : "text-gray-500 top-1/2 left-12 transform -translate-y-1/2"
                               }`}
                         >
@@ -86,9 +110,9 @@ function Login({ onForgotPassword = () => { } }) {
                         />
                         <label
                             htmlFor="password"
-                            className={`absolute transition-all duration-200 pointer-events-none ${
+                            className={`absolute transition-all duration-350 pointer-events-none ${
                                 focusedField === "password" || formData.password
-                                  ? "text-s -top-3 left-6 px-2 text-yellow-500"
+                                  ? "text-xs -top-3 tracking-[0.1rem] left-6 px-2 text-yellow-500"
                                   : "text-gray-500 top-1/2 left-12 transform -translate-y-1/2"
                               }`}
                         >
@@ -105,7 +129,7 @@ function Login({ onForgotPassword = () => { } }) {
                     <div className="relative mt-6">
                         <button
                             type="submit"
-                            className="w-full bg-yellow-500 text-white py-3 rounded-full hover:bg-yellow-600 active:bg-yellow-600 font-bold transition-all cursor-pointer active:shadow-lg active:transform active:translate-y-0.5"
+                            className="w-full bg-yellow-500 hover:-translate-y-1 text-white py-3 rounded-full hover:bg-yellow-600 active:bg-yellow-600 font-bold transition-all cursor-pointer active:shadow-lg active:transform active:translate-y-0.5"
                         >
                             Login
                         </button>
@@ -116,11 +140,14 @@ function Login({ onForgotPassword = () => { } }) {
             <div className="mt-6">
                 <button
                     onClick={onForgotPassword}
-                    className="relative text-sm text-red-700 hover:text-amber-700 font-bold transition-colors cursor-pointer ml-4.5"
+                    className="relative hover:underline text-sm text-red-700 hover:text-amber-700 font-bold transition-colors cursor-pointer ml-4.5"
                 >
                     Forgot Password?
                 </button>
             </div>
+        </div>
+       
+            
         </>
     )
 }
