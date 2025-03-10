@@ -1,6 +1,8 @@
 import { useRef, useState } from "react"
 import { CircleUserRound, KeyRound, Eye, EyeOff } from "lucide-react"
 
+
+
 function Login({ onForgotPassword = () => { } }) {
     const [formData, setFormData] = useState({
         username: "",
@@ -15,17 +17,53 @@ function Login({ onForgotPassword = () => { } }) {
     const handleSubmit =  async(e) => {
         e.preventDefault()
         // Handle login logic here
-        const response = await fetch("http://localhost:5000/api/auth/Register" , {
-            method: "POST",
-            body: JSON.stringify(formData),
-            headers: {
-              "Content-Type": "application/JSON",
-            } 
+        // const response = await fetch("https://saitm-erp.onrender.com/api/v1/auth/login" , {
+        //     method: "POST",
+        //     body: JSON.stringify(formData),
+        //     headers: {
+        //       "Content-Type": "application/JSON",
+        //     } 
           
             
-          }
-        )
+        //   }
+        // )
+
+        // console.log(await response.json())
+        const myHeaders = new Headers();
+myHeaders.append("Content-Type", "application/json");
+
+// const raw = JSON.stringify({
+//   "email": "sachinkumarq87@gmail.com",
+//   "password": "1234554",
+//   "role": "admin"
+// });
+
+const requestOptions = {
+  method: "POST",
+  headers: myHeaders,
+  body: JSON.stringify(formData),
+  redirect: "follow"
+};
+
+fetch("https://saitm-erp.onrender.com/api/v1/auth/login", requestOptions)
+  .then((response) => response.json())
+  .then((result) => {
+    if(result.success){
+        alert("loggin Successful")
+      }
+      else(
+       
+    console.log(result)
+
+      )
+  })
+  .catch((error) => console.error(error));
+
+ 
     }
+
+   
+    
 
     const  handleChange =  (e) => {
         setFormData({
