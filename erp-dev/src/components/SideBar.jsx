@@ -1,6 +1,7 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
 
+
 const SideBar = ({ children }) => {
   const allRoutes = [
     { path: "/home", name: "Home" },
@@ -9,7 +10,14 @@ const SideBar = ({ children }) => {
     { path: "/dashboard", name: "Dashboard" },
   ];
 
+
+
+
+
+
   return (
+    <>
+
     <div className="flex">
       {/* Sidebar */}
       <aside className="w-60 h-screen bg-gradient-to-b from-red-600 to-red-400 text-white p-5 shadow-lg">
@@ -22,11 +30,11 @@ const SideBar = ({ children }) => {
               className={({ isActive }) =>
                 `block py-3 px-4 rounded-lg transition-all duration-300 text-lg font-semibold ${
                   isActive
-                    ? "bg-white text-red-500 shadow-md"
-                    : "hover:bg-red-700 hover:shadow-lg"
+                  ? "bg-white text-red-500 shadow-md"
+                  : "hover:bg-red-700 hover:shadow-lg"
                 }`
               }
-            >
+              >
               {ele.name}
             </NavLink>
           ))}
@@ -36,6 +44,7 @@ const SideBar = ({ children }) => {
       {/* Main Content */}
       <main className="flex-1 p-6">{children}</main>
     </div>
+          </>
   );
 };
 
