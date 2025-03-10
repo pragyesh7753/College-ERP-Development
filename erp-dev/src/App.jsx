@@ -2,7 +2,14 @@ import React, { useState } from 'react'
 import Navbar from "./components/Navbar";
 import Login from "./components/Login";
 import ForgotPassword from './components/ForgotPassword';
-import Dashboard from './components/Dashboard';
+import Dashboard from './components/SideBar';
+import {BrowserRouter, Routes , Route} from 'react-router-dom'
+import Dash_board from './pages/Dash_board';
+import About from './pages/About';
+import Contact from './pages/Contact';
+import Home from './pages/Home';
+import SideBar from './components/SideBar';
+
 
 function App() {
   const [showForgotPassword, setShowForgotPassword] = useState(false);
@@ -47,9 +54,23 @@ function App() {
 
 
   return (
+<>
+
+<BrowserRouter>
+<SideBar >
+<Routes>
+    <Route path='/' element ={<Dash_board/>}/>
+    <Route path='/Home' element ={<Home/>}/>
+    <Route path='/Contact' element ={<Contact />}/>
+    <Route path='/About' element ={<About/>}/>
+</Routes>
+</SideBar>
+  </BrowserRouter>
 
 
-    <Dashboard />
+ 
+</>
+
   )
 
   
