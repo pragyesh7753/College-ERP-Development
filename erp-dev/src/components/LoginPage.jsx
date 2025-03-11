@@ -1,22 +1,23 @@
-import React, { useState } from "react";
+import { useState } from "react";
+import PropTypes from 'prop-types';
 import ForgotPassword from "./ForgotPassword";
 import Login from "./Login"
 
-function LoginPage({setIsLoggedIn}) {
+function LoginPage({ setIsLoggedIn }) {
   const [showForgotPassword, setShowForgotPassword] = useState(false);
 
   return (
     <div className="min-h-screen relative">
       {/* Background Image */}
       <div
-        className="absolute inset-0 z-0"
+        className="absolute inset-0 z-0 "
         style={{
-          backgroundImage: "url(/assets/saitm-bg.png)", // Use relative path from public folder
-          backgroundSize: "cover",
-          backgroundPosition: "center",
-          opacity: "0.4",
-          backgroundRepeat: "no-repeat",
-          backgroundAttachment: "fixed",
+          backgroundImage: "url(src/assets/saitm-bg.png)",
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
+          opacity: '0.4',
+          backgroundRepeat: 'no-repeat',
+          backgroundAttachment: 'fixed',
         }}
       />
 
@@ -41,5 +42,8 @@ function LoginPage({setIsLoggedIn}) {
     </div>
   );
 }
+LoginPage.propTypes = {
+  setIsLoggedIn: PropTypes.func.isRequired,
+};
 
 export default LoginPage;

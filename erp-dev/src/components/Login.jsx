@@ -1,7 +1,8 @@
 import { useRef, useState } from "react";
 import { CircleUserRound, KeyRound, Eye, EyeOff } from "lucide-react";
+import PropTypes from 'prop-types';
 
-function Login({ setIsLoggedIn, onForgotPassword = () => {} }) { // ✅ Added setIsLoggedIn
+function Login({ setIsLoggedIn, onForgotPassword = () => {} }) { 
     const [formData, setFormData] = useState({
         username: "",
         password: "",
@@ -135,5 +136,9 @@ function Login({ setIsLoggedIn, onForgotPassword = () => {} }) { // ✅ Added se
         </>
     );
 }
+Login.propTypes = {
+    setIsLoggedIn: PropTypes.func.isRequired,
+    onForgotPassword: PropTypes.func
+};
 
 export default Login;

@@ -1,5 +1,6 @@
-import React from "react";
-import { NavLink } from "react-router-dom";
+// import React from "react";
+import { NavLink } from "react-router";
+import PropTypes from 'prop-types';
 
 
 const SideBar = ({ children }) => {
@@ -46,6 +47,9 @@ const SideBar = ({ children }) => {
     </div>
           </>
   );
+};
+SideBar.propTypes = {
+  children: PropTypes.node,
 };
 
 export default SideBar;
