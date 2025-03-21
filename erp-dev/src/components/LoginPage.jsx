@@ -22,7 +22,7 @@ function LoginPage({ setIsLoggedIn }) {
       />
 
       <main className="z-10 flex flex-col items-center">
-        {/* Glass Card */}
+        {/* Login Card */}
         <div
           className="relative bg-white rounded-2xl shadow-2xl border border-white/20 p-8 top-40 z-10"
         >
@@ -35,7 +35,7 @@ function LoginPage({ setIsLoggedIn }) {
           </div>
 
           <p className="my-6 mx-10 text-sm font-normal">
-            © 2025 St. Andrews Institute of Technology and Management All Rights Reserved
+            © 2025 St. Andrews Institute of Technology and Management. All Rights Reserved
           </p>
         </div>
       </main>

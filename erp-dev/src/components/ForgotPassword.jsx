@@ -1,5 +1,6 @@
 import { useState, useRef } from "react"
 import { Mail } from "lucide-react"
+import PropTypes from 'prop-types'
 
 function ForgotPassword({ onBack = () => { } }) {
     const [email, setEmail] = useState("")
@@ -80,6 +81,9 @@ function ForgotPassword({ onBack = () => { } }) {
 </div>
 </>
     )
+}
+ForgotPassword.propTypes = {
+  onBack: PropTypes.func
 }
 
 export default ForgotPassword

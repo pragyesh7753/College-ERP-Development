@@ -1,12 +1,14 @@
 import { useRef, useState } from "react";
 import { CircleUserRound, KeyRound, Eye, EyeOff } from "lucide-react";
 import PropTypes from 'prop-types';
+import { toast } from "react-toastify";
+import { Bounce } from "react-toastify";
 
-function Login({ setIsLoggedIn, onForgotPassword = () => {} }) { 
+function Login({ setIsLoggedIn, onForgotPassword = () => { } }) {
     const [formData, setFormData] = useState({
         username: "",
         password: "",
-        
+
     });
 
     const [showPassword, setShowPassword] = useState(false);
@@ -18,29 +20,49 @@ function Login({ setIsLoggedIn, onForgotPassword = () => {} }) {
         e.preventDefault();
         const myHeaders = new Headers();
         myHeaders.append("Content-Type", "application/json");
-        
+
         const raw = JSON.stringify({
-          "email": "sachinkumarq87@gmail.com",
-          "password": "1234554",
-          "role": "admin"
+            "email": "sachinkumarq87@gmail.com",
+            "password": "1234554",
+            "role": "admin"
         });
-        
+
         const requestOptions = {
-          method: "POST",
-          headers: myHeaders,
-          body: raw,
-          redirect: "follow"
+            method: "POST",
+            headers: myHeaders,
+            body: raw,
+            redirect: "follow"
         };
 
         fetch("https://saitm-erp.onrender.com/api/v1/auth/login", requestOptions)
             .then((response) => response.json())
             .then((result) => {
                 if (result.success) {
-                    alert("Login Successful");
-                    setIsLoggedIn(true); 
+                    toast.success('Successfully Logged in!', {
+                        position: "top-right",
+                        autoClose: 3000,
+                        hideProgressBar: false,
+                        closeOnClick: false,
+                        pauseOnHover: true,
+                        draggable: true,
+                        progress: undefined,
+                        theme: "light",
+                        transition: Bounce,
+                    });
+                    setIsLoggedIn(true);
                 } else {
                     console.log(result);
-                    alert("Invalid credentials");
+                    toast.success('Invalid credentials!', {
+                        position: "top-right",
+                        autoClose: 3000,
+                        hideProgressBar: false,
+                        closeOnClick: false,
+                        pauseOnHover: true,
+                        draggable: true,
+                        progress: undefined,
+                        theme: "light",
+                        transition: Bounce,
+                    });
                 }
             })
             .catch((error) => console.error(error));
@@ -70,11 +92,10 @@ function Login({ setIsLoggedIn, onForgotPassword = () => {} }) {
                             />
                             <label
                                 htmlFor="username"
-                                className={`absolute transition-all duration-350 pointer-events-none ${
-                                    focusedField === "username" || formData.username
+                                className={`absolute transition-all duration-350 pointer-events-none ${focusedField === "username" || formData.username
                                         ? "text-xs -top-3 tracking-[0.1rem] left-6 px-2 text-yellow-500"
                                         : "text-gray-500 top-1/2 left-12 transform -translate-y-1/2"
-                                }`}
+                                    }`}
                             >
                                 Username
                             </label>
@@ -96,11 +117,10 @@ function Login({ setIsLoggedIn, onForgotPassword = () => {} }) {
                             />
                             <label
                                 htmlFor="password"
-                                className={`absolute transition-all duration-350 pointer-events-none ${
-                                    focusedField === "password" || formData.password
+                                className={`absolute transition-all duration-350 pointer-events-none ${focusedField === "password" || formData.password
                                         ? "text-xs -top-3 tracking-[0.1rem] left-6 px-2 text-yellow-500"
                                         : "text-gray-500 top-1/2 left-12 transform -translate-y-1/2"
-                                }`}
+                                    }`}
                             >
                                 Password
                             </label>
