@@ -1,5 +1,6 @@
 import { useRef, useState } from "react";
 import { CircleUserRound, KeyRound, Eye, EyeOff } from "lucide-react";
+import { HashLoader } from "react-spinners";
 import PropTypes from 'prop-types';
 import { toast, Bounce } from "react-toastify";
 
@@ -14,9 +15,11 @@ function Login({ setIsLoggedIn, onForgotPassword = () => { } }) {
     const [focusedField, setFocusedField] = useState(null);
     const passwordRef = useRef(null);
     const emailRef = useRef(null);
+    const [isLoading, setIsLoading] = useState(false);
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+        setIsLoading(true);
         const myHeaders = new Headers();
         myHeaders.append("Content-Type", "application/json");
 
@@ -34,6 +37,7 @@ function Login({ setIsLoggedIn, onForgotPassword = () => { } }) {
         fetch("https://saitm-erp.onrender.com/api/v1/auth/login", requestOptions)
             .then((response) => response.json())
             .then((result) => {
+                setIsLoading(false);
                 if (result.success) {
                     toast.success('Successfully Logged in!', {
                         position: "top-right",
@@ -48,8 +52,7 @@ function Login({ setIsLoggedIn, onForgotPassword = () => { } }) {
                     });
                     setIsLoggedIn(true);
                 } else {
-                    const errorMessage = result.message || 'Invalid credentials!';
-                    toast.error(errorMessage, {
+                    toast.error('Invalid credentials!', {
                         position: "top-right",
                         autoClose: 3000,
                         hideProgressBar: false,
@@ -63,6 +66,7 @@ function Login({ setIsLoggedIn, onForgotPassword = () => { } }) {
                 }
             })
             .catch((error) => {
+                setIsLoading(false);
                 console.error(error);
                 toast.error('Network error. Please try again.', {
                     position: "top-right",
@@ -145,9 +149,20 @@ function Login({ setIsLoggedIn, onForgotPassword = () => { } }) {
                         <div className="relative mt-6">
                             <button
                                 type="submit"
-                                className="w-full bg-yellow-500 hover:-translate-y-1 text-white py-3 rounded-full hover:bg-yellow-600 active:bg-yellow-600 font-bold transition-all cursor-pointer active:shadow-lg active:transform active:translate-y-0.5"
+                                disabled={isLoading}
+                                className={`w-full bg-yellow-500 hover:-translate-y-1 text-white py-3 rounded-full hover:bg-yellow-600 active:bg-yellow-600 font-bold transition-all cursor-pointer active:shadow-lg active:transform active:translate-y-0.5 ${isLoading ? 'opacity-90' : ''}`}
                             >
-                                Login
+                                {isLoading ? (
+                                    <div className="flex items-center justify-center">
+                                        <HashLoader
+                                            color="#cf1414"
+                                            size={30}
+                                        />
+                                        <span>&nbsp;Logging in...</span>
+                                    </div>
+                                ) : (
+                                    "Login"
+                                )}
                             </button>
                         </div>
                     </div>
