@@ -1,8 +1,9 @@
 import { useRef, useState } from "react";
 import { CircleUserRound, KeyRound, Eye, EyeOff } from "lucide-react";
-import { HashLoader } from "react-spinners";
+import { RingLoader } from "react-spinners";
 import PropTypes from 'prop-types';
 import { toast, Bounce } from "react-toastify";
+import { AuthApi } from "../networking/api/AuthApi";
 
 function Login({ setIsLoggedIn, onForgotPassword = () => { } }) {
     const [formData, setFormData] = useState({
@@ -20,66 +21,43 @@ function Login({ setIsLoggedIn, onForgotPassword = () => { } }) {
     const handleSubmit = async (e) => {
         e.preventDefault();
         setIsLoading(true);
-        const myHeaders = new Headers();
-        myHeaders.append("Content-Type", "application/json");
-
-        const raw = JSON.stringify(formData);
-
-        const requestOptions = {
-            method: "POST",
-            headers: myHeaders,
-            body: raw,
-            redirect: "follow",
-        };
-
-        console.log(raw);
-
-        fetch("https://saitm-erp.onrender.com/api/v1/auth/login", requestOptions)
-            .then((response) => response.json())
-            .then((result) => {
-                setIsLoading(false);
-                if (result.success) {
-                    toast.success('Successfully Logged in!', {
-                        position: "top-right",
-                        autoClose: 3000,
-                        hideProgressBar: false,
-                        closeOnClick: false,
-                        pauseOnHover: true,
-                        draggable: true,
-                        progress: undefined,
-                        theme: "light",
-                        transition: Bounce,
-                    });
-                    setIsLoggedIn(true);
-                } else {
-                    toast.error('Invalid credentials!', {
-                        position: "top-right",
-                        autoClose: 3000,
-                        hideProgressBar: false,
-                        closeOnClick: false,
-                        pauseOnHover: true,
-                        draggable: true,
-                        progress: undefined,
-                        theme: "light",
-                        transition: Bounce,
-                    });
-                }
-            })
-            .catch((error) => {
-                setIsLoading(false);
-                console.error(error);
-                toast.error('Network error. Please try again.', {
+        try {
+            const response = await AuthApi.login(formData);
+            console.log(response)
+            if (response.code === 200 && !response.error) {
+                setIsLoggedIn(true);
+                document.cookie =`accessToken=${response.data.data.accessToken}; path=/`;
+                toast.success("Logged in successfully", {
                     position: "top-right",
                     autoClose: 3000,
                     hideProgressBar: false,
                     closeOnClick: true,
                     pauseOnHover: true,
                     draggable: true,
-                    theme: "light",
-                    transition: Bounce,
+                    progress: undefined,
+                    transition: Bounce
                 });
-            });
-    };
+            }
+            else {
+                toast.error(response.data.message, {
+                    position: "top-right",
+                    autoClose: 3000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                    transition: Bounce
+                });
+            }
+
+        } catch (error) {
+            console.log(error)
+        }
+        finally{
+            setIsLoading(false);
+        }
+    }
 
     return (
         <>
@@ -154,8 +132,8 @@ function Login({ setIsLoggedIn, onForgotPassword = () => { } }) {
                             >
                                 {isLoading ? (
                                     <div className="flex items-center justify-center">
-                                        <HashLoader
-                                            color="#cf1414"
+                                        <RingLoader
+                                            color="#ffffff"
                                             size={30}
                                         />
                                         <span>&nbsp;Logging in...</span>
