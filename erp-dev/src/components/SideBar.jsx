@@ -1,17 +1,18 @@
 import { useState } from 'react';
 import { GraduationCap, Users, School, Calendar, BookOpen, Settings, BarChart, SquareChevronLeft, SquareChevronRight } from 'lucide-react';
+import { NavLink } from 'react-router';
 
 export default function SideBar() {
     const [isCollapsed, setIsCollapsed] = useState(false);
     const [activeItem, setActiveItem] = useState('Dashboard');
 
     const menuItems = [
-        { icon: BarChart, text: 'Dashboard' },
-        { icon: Users, text: 'Students' },
-        { icon: School, text: 'Faculty' },
-        { icon: Calendar, text: 'Schedule' },
-        { icon: BookOpen, text: 'Courses' },
-        { icon: Settings, text: 'Settings' },
+        { icon: BarChart, text: 'Dashboard', path: '/' },
+        { icon: Users, text: 'Students', path: '/students' },
+        { icon: School, text: 'Faculty', path: '/faculty' },
+        { icon: Calendar, text: 'Schedule', path: '/schedule' },
+        { icon: BookOpen, text: 'Courses', path: '/courses'},
+        { icon: Settings, text: 'Settings', path: '/settings'},
     ];
 
     return (
@@ -38,7 +39,8 @@ export default function SideBar() {
             <nav className="mt-8 px-2">
                 {menuItems.map((item, index) => (
                     <div key={index} className="relative group/item mb-2">
-                        <button
+                        <NavLink
+                            to={item.path}
                             onClick={() => setActiveItem(item.text)}
                             className={`w-full flex items-center p-3 rounded-lg transition-all duration-200
                                 ${activeItem === item.text
@@ -48,7 +50,7 @@ export default function SideBar() {
                         >
                             <item.icon className={`w-6 h-6 ${isCollapsed ? 'mx-auto' : ''}`} />
                             {!isCollapsed && <span className="ml-3">{item.text}</span>}
-                        </button>
+                        </NavLink>
                         
                         {/* Enhanced dynamic underline */}
                         {!isCollapsed && (
@@ -72,17 +74,6 @@ export default function SideBar() {
                 </div>
             )}
 
-            {!isCollapsed && (
-                <div className="absolute bottom-0 left-0 right-0 p-4">
-                    <div className="bg-white/10 rounded-lg p-4">
-                        <p className="text-white text-sm">System Status</p>
-                        <div className="flex items-center mt-2">
-                            <div className="w-2 h-2 bg-green-400 rounded-full"></div>
-                            <span className="ml-2 text-white/80 text-sm">All systems operational</span>
-                        </div>
-                    </div>
-                </div>
-            )}
         </div>
     );
 }

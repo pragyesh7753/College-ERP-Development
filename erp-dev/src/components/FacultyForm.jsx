@@ -254,9 +254,12 @@ export default function FacultyForm({ onClose }) {
                                             required
                                         >
                                             <option value="">Select Department</option>
-                                            <option value="cs">Computer Science</option>
-                                            <option value="ee">Electrical Engineering</option>
-                                            <option value="me">Mechanical Engineering</option>
+                                            <option value="cse">Computer Science & Engineering</option>
+                                            <option value="cst">Computer Science & Technology</option>
+                                            <option value="etce">Electronics & Telecommunication Engineering</option>
+                                            <option value="ca">Computer Applications</option>
+                                            <option value="ms">Management Studies</option>
+                                            <option value="ph">Pharmacy</option>
                                         </select>
                                     </div>
                                     <div className="space-y-2">

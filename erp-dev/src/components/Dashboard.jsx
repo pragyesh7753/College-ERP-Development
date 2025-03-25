@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import Sidebar from './SideBar';
 import StudentForm from './StudentForm';
 import FacultyForm from './FacultyForm';
 import { UserPlus, GraduationCap, Bell, User, Search } from 'lucide-react';
@@ -22,7 +21,7 @@ function Dashboard() {
 
     return (
         <div className="flex min-h-screen bg-gray-100">
-            <Sidebar />
+            {/* Sidebar removed */}
 
             <div className="flex-1">
                 <header className="bg-white shadow-lg p-4">
@@ -99,24 +98,21 @@ function Dashboard() {
                         <div className="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow">
                             <div className="flex items-center justify-between">
                                 <h3 className="text-lg font-semibold mb-2">Total Students</h3>
-                                <span className="text-xs text-green-500 bg-green-100 px-2 py-1 rounded-full">+12% ↑</span>
-                            </div>
+                                </div>
                             <p className="text-4xl font-bold text-[#FF4B2B]">1,234</p>
                             <p className="text-sm text-gray-500 mt-2">Across all departments</p>
                         </div>
                         <div className="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow">
                             <div className="flex items-center justify-between">
                                 <h3 className="text-lg font-semibold mb-2">Total Faculty</h3>
-                                <span className="text-xs text-blue-500 bg-blue-100 px-2 py-1 rounded-full">+5% ↑</span>
-                            </div>
+                                </div>
                             <p className="text-4xl font-bold text-[#FF8C42]">89</p>
                             <p className="text-sm text-gray-500 mt-2">Full-time & visiting</p>
                         </div>
                         <div className="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow">
                             <div className="flex items-center justify-between">
                                 <h3 className="text-lg font-semibold mb-2">Active Courses</h3>
-                                <span className="text-xs text-purple-500 bg-purple-100 px-2 py-1 rounded-full">New</span>
-                            </div>
+                                </div>
                             <p className="text-4xl font-bold text-[#FF4B2B]">24</p>
                             <p className="text-sm text-gray-500 mt-2">Current semester</p>
                         </div>
