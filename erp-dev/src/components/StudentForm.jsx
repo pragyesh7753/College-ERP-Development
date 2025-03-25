@@ -232,7 +232,7 @@ export default function StudentForm({ onClose }) {
                             <h3 className="text-lg font-semibold text-gray-900 border-b pb-2">Educational Details</h3>
                             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                                 <div className="space-y-2">
-                                    <label className="text-sm font-medium text-gray-700">Course</label>
+                                    <label className="text-sm font-medium text-gray-700">Course you are applying for</label>
                                     <select
                                         name="course"
                                         value={formData.course}
@@ -241,6 +241,8 @@ export default function StudentForm({ onClose }) {
                                         required
                                     >
                                         <option value="">Select Course</option>
+                                        <option value="mba">BCA</option>
+                                        <option value="mba">MCA</option>
                                         <option value="btech">B.Tech</option>
                                         <option value="mtech">M.Tech</option>
                                         <option value="bba">BBA</option>
@@ -248,15 +250,22 @@ export default function StudentForm({ onClose }) {
                                     </select>
                                 </div>
                                 <div className="space-y-2">
-                                    <label className="text-sm font-medium text-gray-700">Previous School/College</label>
-                                    <input
+                                    <label className="text-sm font-medium text-gray-700">Previous Education</label>
+                                    <select
                                         type="text"
                                         name="previousSchool"
                                         value={formData.previousSchool}
                                         onChange={handleChange}
                                         className="w-full border border-gray-300 rounded-lg p-2.5 focus:ring-2 focus:ring-[#FF4B2B] focus:border-transparent transition-all"
                                         required
-                                    />
+                                    >
+                                        <option value="">Select</option>
+                                        <option value="mba">High School</option>
+                                        <option value="mba">Intermediate</option>
+                                        <option value="btech">Diploma</option>
+                                    </select>
+
+
                                 </div>
                                 <div className="space-y-2">
                                     <label className="text-sm font-medium text-gray-700">Previous Percentage/CGPA</label>
