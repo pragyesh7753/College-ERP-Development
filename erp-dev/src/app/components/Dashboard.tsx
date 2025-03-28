@@ -13,7 +13,7 @@ function Dashboard() {
     ]);
     const [showNotifications, setShowNotifications] = useState(false);
 
-    const markAsRead = (id) => {
+    const markAsRead = (id: number) => {
         setNotifications(notifications.map(n =>
             n.id === id ? { ...n, unread: false } : n
         ));
@@ -98,21 +98,21 @@ function Dashboard() {
                         <div className="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow">
                             <div className="flex items-center justify-between">
                                 <h3 className="text-lg font-semibold mb-2">Total Students</h3>
-                                </div>
+                            </div>
                             <p className="text-4xl font-bold text-[#FF4B2B]">1,234</p>
                             <p className="text-sm text-gray-500 mt-2">Across all departments</p>
                         </div>
                         <div className="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow">
                             <div className="flex items-center justify-between">
                                 <h3 className="text-lg font-semibold mb-2">Total Faculty</h3>
-                                </div>
+                            </div>
                             <p className="text-4xl font-bold text-[#FF8C42]">89</p>
                             <p className="text-sm text-gray-500 mt-2">Full-time & visiting</p>
                         </div>
                         <div className="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow">
                             <div className="flex items-center justify-between">
                                 <h3 className="text-lg font-semibold mb-2">Active Courses</h3>
-                                </div>
+                            </div>
                             <p className="text-4xl font-bold text-[#FF4B2B]">24</p>
                             <p className="text-sm text-gray-500 mt-2">Current semester</p>
                         </div>

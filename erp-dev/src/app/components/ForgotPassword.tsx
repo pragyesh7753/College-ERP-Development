@@ -1,13 +1,14 @@
 import { useState, useRef } from "react"
 import { Mail } from "lucide-react"
 import PropTypes from 'prop-types'
+import Image from 'next/image'
 
 function ForgotPassword({ onBack = () => { } }) {
     const [email, setEmail] = useState("")
     const [isFocused, setIsFocused] = useState(false)
     const emailRef = useRef(null)
 
-    const handleSubmit = (e) => {
+    const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault()
         console.log("Password reset requested for:", email)
     }
@@ -74,11 +75,15 @@ function ForgotPassword({ onBack = () => { } }) {
     
         </div>
 
-        
-      <div className="  transition-transform duration-500 img-2 ">
-
-<img src="./src/assets/logo-nav.png" alt="logo"  />
-</div>
+  <div className="  transition-transform duration-500 img-2 ">
+    <Image 
+      src="/assets/logo-nav.png" 
+      alt="logo" 
+      width={500} 
+      height={300}
+      priority
+    />
+  </div>
 </>
     )
 }

@@ -3,7 +3,11 @@ import PropTypes from 'prop-types';
 import ForgotPassword from "./ForgotPassword";
 import Login from "./Login"
 
-function LoginPage({ setIsLoggedIn }) {
+interface LoginPageProps {
+  setIsLoggedIn: (isLoggedIn: boolean) => void;
+}
+
+function LoginPage({ setIsLoggedIn }: LoginPageProps) {
   const [showForgotPassword, setShowForgotPassword] = useState(false);
 
   return (

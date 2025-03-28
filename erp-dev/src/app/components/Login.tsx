@@ -1,32 +1,55 @@
-import { useRef, useState } from "react";
+import { useRef, useState, FormEvent , ChangeEvent } from "react";
 import { CircleUserRound, KeyRound, Eye, EyeOff } from "lucide-react";
 import { RingLoader } from "react-spinners";
 import PropTypes from 'prop-types';
 import { toast, Bounce } from "react-toastify";
-import { AuthApi } from "../networking/api/AuthApi";
+import { AuthApi } from "../../pages/api/AuthApi";
+import Image from "next/image";
 
-function Login({ setIsLoggedIn, onForgotPassword = () => { } }) {
-    const [formData, setFormData] = useState({
+interface LoginProps {
+  setIsLoggedIn: (isLoggedIn: boolean) => void;
+  onForgotPassword?: () => void;
+}
+
+interface FormData {
+  email: string;
+  password: string;
+  role: string;
+}
+
+interface ApiResponse {
+  code: number;
+  error: boolean;
+  data?: {
+    data: {
+      accessToken: string;
+    }
+    message?: string;
+  };
+}
+
+function Login({ setIsLoggedIn, onForgotPassword = () => { } }: LoginProps) {
+    const [formData, setFormData] = useState<FormData>({
         email: "",
         password: "",
         role: "admin"
     });
 
-    const [showPassword, setShowPassword] = useState(false);
-    const [focusedField, setFocusedField] = useState(null);
-    const passwordRef = useRef(null);
-    const emailRef = useRef(null);
-    const [isLoading, setIsLoading] = useState(false);
+    const [showPassword, setShowPassword] = useState<boolean>(false);
+    const [focusedField, setFocusedField] = useState<string | null>(null);
+    const passwordRef = useRef<HTMLInputElement>(null);
+    const emailRef = useRef<HTMLInputElement>(null);
+    const [isLoading, setIsLoading] = useState<boolean>(false);
 
-    const handleSubmit = async (e) => {
+    const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         setIsLoading(true);
         try {
-            const response = await AuthApi.login(formData);
+            const response: ApiResponse = await AuthApi.login(formData);
             console.log(response)
             if (response.code === 200 && !response.error) {
                 setIsLoggedIn(true);
-                document.cookie =`accessToken=${response.data.data.accessToken}; path=/`;
+                document.cookie =`accessToken=${response.data?.data.accessToken}; path=/`;
                 toast.success("Logged in successfully", {
                     position: "top-right",
                     autoClose: 3000,
@@ -39,7 +62,7 @@ function Login({ setIsLoggedIn, onForgotPassword = () => { } }) {
                 });
             }
             else {
-                toast.error(response.data.message, {
+                toast.error(response.data?.message || "Login failed", {
                     position: "top-right",
                     autoClose: 3000,
                     hideProgressBar: false,
@@ -59,10 +82,29 @@ function Login({ setIsLoggedIn, onForgotPassword = () => { } }) {
         }
     }
 
+    const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
+        const { name, value } = e.target;
+        setFormData({ ...formData, [name]: value });
+    };
+
+    const handleFocus = (field: string) => {
+        setFocusedField(field);
+    };
+
+    const handleBlur = () => {
+        setFocusedField(null);
+    };
+
     return (
         <>
             <div className="transition-transform duration-500 img-2">
-                <img src="./src/assets/logo-nav.png" alt="logo" />
+                <Image 
+                    src="/assets/logo-nav.png" 
+                    alt="logo" 
+                    width={150} 
+                    height={50}
+                    priority
+                />
             </div>
             <div>
                 <form onSubmit={handleSubmit} className="w-full max-w-md px-6">
@@ -74,9 +116,9 @@ function Login({ setIsLoggedIn, onForgotPassword = () => { } }) {
                                 name="email"
                                 id="email"
                                 value={formData.email}
-                                onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                                onFocus={() => setFocusedField("email")}
-                                onBlur={() => setFocusedField(null)}
+                                onChange={handleInputChange}
+                                onFocus={() => handleFocus("email")}
+                                onBlur={handleBlur}
                                 ref={emailRef}
                                 className="w-full pl-12 pr-4 py-3 rounded-full bg-white border-2 border-gray-200 focus:border-b-yellow-500 focus:ring-2 focus:ring-yellow-100 outline-none transition-all"
                                 required
@@ -99,9 +141,9 @@ function Login({ setIsLoggedIn, onForgotPassword = () => { } }) {
                                 name="password"
                                 id="password"
                                 value={formData.password}
-                                onChange={(e) => setFormData({ ...formData, password: e.target.value })}
-                                onFocus={() => setFocusedField("password")}
-                                onBlur={() => setFocusedField(null)}
+                                onChange={handleInputChange}
+                                onFocus={() => handleFocus("password")}
+                                onBlur={handleBlur}
                                 ref={passwordRef}
                                 className="w-full pl-12 pr-12 py-3 rounded-full bg-white border-2 border-gray-200 focus:border-b-yellow-500 focus:ring-2 focus:ring-yellow-100 outline-none transition-all"
                                 required
@@ -158,6 +200,8 @@ function Login({ setIsLoggedIn, onForgotPassword = () => { } }) {
         </>
     );
 }
+
+// PropTypes can be kept for backward compatibility
 Login.propTypes = {
     setIsLoggedIn: PropTypes.func.isRequired,
     onForgotPassword: PropTypes.func

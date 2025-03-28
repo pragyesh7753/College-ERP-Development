@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { GraduationCap, Users, School, Calendar, BookOpen, Settings, BarChart, SquareChevronLeft, SquareChevronRight } from 'lucide-react';
-import { NavLink } from 'react-router';
+import Link from 'next/link';
 
 export default function SideBar() {
     const [isCollapsed, setIsCollapsed] = useState(false);
@@ -11,8 +11,8 @@ export default function SideBar() {
         { icon: Users, text: 'Students', path: '/students' },
         { icon: School, text: 'Faculty', path: '/faculty' },
         { icon: Calendar, text: 'Schedule', path: '/schedule' },
-        { icon: BookOpen, text: 'Courses', path: '/courses'},
-        { icon: Settings, text: 'Settings', path: '/settings'},
+        { icon: BookOpen, text: 'Courses', path: '/courses' },
+        { icon: Settings, text: 'Settings', path: '/settings' },
     ];
 
     return (
@@ -39,8 +39,8 @@ export default function SideBar() {
             <nav className="mt-8 px-2">
                 {menuItems.map((item, index) => (
                     <div key={index} className="relative group/item mb-2">
-                        <NavLink
-                            to={item.path}
+                        <Link
+                            href={item.path}
                             onClick={() => setActiveItem(item.text)}
                             className={`w-full flex items-center p-3 rounded-lg transition-all duration-200
                                 ${activeItem === item.text
@@ -50,15 +50,15 @@ export default function SideBar() {
                         >
                             <item.icon className={`w-6 h-6 ${isCollapsed ? 'mx-auto' : ''}`} />
                             {!isCollapsed && <span className="ml-3">{item.text}</span>}
-                        </NavLink>
-                        
+                        </Link>
+
                         {/* Enhanced dynamic underline */}
                         {!isCollapsed && (
                             <div className="absolute bottom-0 left-0 w-full h-0.5 overflow-hidden">
-                                <div 
+                                <div
                                     className={`h-full bg-white transition-transform duration-300 ease-out
-                                        ${activeItem === item.text 
-                                            ? 'translate-x-0' 
+                                        ${activeItem === item.text
+                                            ? 'translate-x-0'
                                             : '-translate-x-full group-hover/item:translate-x-0'
                                         }`}
                                 ></div>
